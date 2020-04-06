@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="cb56a2e6-b906-4bf7-95e2-6956cf137ef1" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="D:\workspace\musala-test\.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1a7qMjEYzSLw86LFTT63Ppm5Tkz" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="terminal" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\workspace\musala-test\react-client" />
+      <recent name="D:\workspace\musala-test" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="dev" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cb56a2e6-b906-4bf7-95e2-6956cf137ef1" name="Default Changelist" comment="" />
+      <created>1586096933808</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1586096933808</updated>
+      <workItem from="1586096935876" duration="8000" />
+      <workItem from="1586096991266" duration="1733000" />
+      <workItem from="1586164522823" duration="8334000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="88" y="23" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586174262575">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="88" y="23" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.738@0.0.1366.738" timestamp="1586174262575" />
+    <state x="414" y="123" key="FileChooserDialogImpl" timestamp="1586169984996">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="414" y="123" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1586169984996" />
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1586174423956">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1586174423956" />
+    <state width="1345" height="179" key="GridCell.Tab.0.center" timestamp="1586174423956">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1345" height="179" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1586174423956" />
+    <state width="1345" height="179" key="GridCell.Tab.0.left" timestamp="1586174423956">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1345" height="179" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1586174423956" />
+    <state width="1345" height="179" key="GridCell.Tab.0.right" timestamp="1586174423956">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1586174423956" />
+    <state x="184" y="11" key="SettingsEditor" timestamp="1586097136136">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="184" y="11" key="SettingsEditor/0.0.1366.738@0.0.1366.738" timestamp="1586097136136" />
+  </component>
+</project>
