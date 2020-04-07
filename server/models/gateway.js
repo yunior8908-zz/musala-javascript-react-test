@@ -25,44 +25,80 @@ const GatewaySchema = new Schema({
         required: [true, "the ipv4 address is required"],
         validate: {
             validator: (v) => {
+                console.log(v);
                 return /\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}\b/.test(v);
             },
             message: ({value}) => `${value} is not a valid ipv4 address`
         }
-    },
-    devices: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Device'
-    }]
+    }, devices: {
+        type: [{
+            type: Schema.Types.ObjectId
+        }]
+    }
 }, {versionKey: false});
 
+GatewaySchema.statics.getAll = async function (prms) {
+    try {
+        const total = await this.find({}).countDocuments();
+        const list = await this.find({}, null, {...prms, lean: true});
+        const result = list.map(gtw => ({...gtw, devices: gtw.devices.length}));
+        return {
+            data: result,
+            total
+        }
+    } catch (e) {
+        throw e;
+    }
+};
+
 GatewaySchema.methods.AddDevice = async function (device) {
-    if (this.devices.length < 10) {
-        try {
-            const exist = this.devices.find(el => el.toString() === device.id.toString());
+    try {
+        if (this.devices.length < 10) {
+
+            const exist = await this.devices.find(el => el.toString() === device.id.toString());
             if (!exist) {
                 this.devices.push(device);
-                await this.updateOne(this);
+                return await this.updateOne(this);
             }
-        } catch (e) {
-            throw e;
+        } else {
+            throw new Error(`The gateway ${this.name} is full of max allowed devices: 10`)
         }
-    } else {
-        throw new Error(`The gateway ${this.name} is full of max allowed devices: 10`)
+    } catch (e) {
+        throw e;
     }
 };
 
 GatewaySchema.methods.RemoveDevice = async function (device) {
-    const exist = this.devices.find(el => el.toString() === device.id.toString());
-    if (exist) {
-        try {
-            this.devices.remove(device);
+    try {
+        const exist = await this.devices.find(el => el.toString() === device.id.toString());
+        if (exist) {
+            return await this.devices.remove(device);
             await this.updateOne(this);
-        } catch (e) {
-            throw e;
-        }
-    } else
-        throw new Error("The device not exist")
+
+        } else
+            throw new Error("The device not exist")
+    } catch (e) {
+        throw e;
+    }
+};
+
+GatewaySchema.statics.withDevices = async function (id, prms) {
+    try {
+        const gtw = await this.findById(id).lean();
+        if (gtw) {
+            const total = await model('Device').find({gatewayId: gtw}).countDocuments();
+            const devices = await model('Device').find({gatewayId: gtw}, null, prms).select('-gatewayId');
+            return {
+                ...gtw,
+                devices: {
+                    list: devices,
+                    total: total
+                }
+            }
+        } else throw new Error('That item not exist');
+    } catch (e) {
+        throw e;
+    }
 };
 
 module.exports = model('Gateway', GatewaySchema);

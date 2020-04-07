@@ -1,41 +1,19 @@
 const router = require('express').Router();
 const GatewayModel = require('../models/gateway');
 
-const {gatewayMutation} = require('../mutation');
-
-router.param('id', async (req, res, next, id) => {
-    try {
-        const result = await GatewayModel.findById(id);
-        if (result) {
-            req.gateway = result;
-            next();
-        } else throw new Error('Item not exist');
-    } catch (e) {
-        const error = {
-            status: 500,
-            error: e,
-        };
-        next(error);
-    }
-});
-
-router.get('/:id', (req, res, next) => {
-    const {gateway} = req;
-    if (gateway) {
-        const result = gateway;
-        return res.json(result);
-    }
-});
+const {gatewayMutation, gatewayFiltersMutation} = require('../mutation');
 
 router.get('/', async (req, res, next) => {
+    const {id, ...prms} = gatewayFiltersMutation(req.query);
     try {
-        const total = await GatewayModel.countDocuments();
-        const list = await GatewayModel.find({}, null, {limit: 10, skip: 0});
-        return res.json({
-            data: list,
-            total
-        })
-    }catch (e) {
+        if (id) {
+            const withDevices = await GatewayModel.withDevices(id, prms);
+            return res.json(withDevices);
+        } else {
+            const gtws = await GatewayModel.getAll(prms);
+            return res.json(gtws);
+        }
+    } catch (e) {
         const error = {
             status: 500,
             error: e
@@ -46,17 +24,15 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
     const {body} = req;
-    const gateway = new GatewayModel({
-        ...gatewayMutation(body)
-    });
-
+    const {id, ...prms} = gatewayMutation(body);
+    const gateway = new GatewayModel(prms);
     try {
         await gateway.save();
         return res.json({
             status: 200,
             message: "ok"
         });
-    }catch (e) {
+    } catch (e) {
         const error = {
             status: 500,
             error: e
@@ -65,42 +41,42 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-router.put('/:id', async (req, res, next) => {
-    const {gateway} = req;
-    const {body} = req;
-    if (gateway) {
-        try {
-            await GatewayModel.updateOne(gateway, gatewayMutation(body));
+router.put('/', async (req, res, next) => {
+    const {id, serial,...prms} = gatewayMutation(req.body);
+    try {
+        if (id) {
+            await GatewayModel.updateOne({_id: id}, prms, {runValidators: true});
             return res.json({
                 status: 200,
                 message: "ok"
             });
-        } catch (e) {
-            const error = {
-                status: 500,
-                error: e
-            };
-            next(error);
-        }
+        } else throw new Error('Bad request');
+    } catch (e) {
+        const error = {
+            status: 500,
+            error: e
+        };
+        next(error);
     }
 });
 
-router.delete('/:id', async (req, res, next) => {
-    const {gateway} = req;
-    if (gateway) {
-        try {
-            await gateway.delete();
+router.delete('/', async (req, res, next) => {
+    const {id} = gatewayMutation(req.body);
+    try {
+        if (id) {
+            const gtw = await GatewayModel.findById(id);
+            await gtw.delete();
             return res.json({
                 status: 200,
                 message: "ok"
             });
-        } catch (e) {
-            const error = {
-                status: 500,
-                error: e
-            };
-            next(error);
-        }
+        } else throw new Error('Bad request');
+    } catch (e) {
+        const error = {
+            status: 500,
+            error: e
+        };
+        next(error);
     }
 });
 

@@ -15,12 +15,28 @@ const DeviceSchema = new Schema({
     },
     status: {
         type: String,
-        enum: ["online","offline"]
+        enum: ["online", "offline"]
     },
-    gateway: {
+    gatewayId: {
         type: Schema.Types.ObjectId,
         ref: 'Gateway'
     }
 }, {versionKey: false});
+
+DeviceSchema.statics.getAll = async function (prms) {
+    try {
+        const total = await this.find({}).countDocuments();
+        const list = await this.find({}, null, prms).populate({
+            path: 'gatewayId',
+            select: '-devices'
+        });
+        return {
+            data: list,
+            total
+        }
+    } catch (e) {
+        throw e;
+    }
+};
 
 module.exports = model('Device', DeviceSchema);
