@@ -2,32 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb56a2e6-b906-4bf7-95e2-6956cf137ef1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/musala-test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Routes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/apiConfig.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/common/Card.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/common/FormGateway.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/drawer/Drawer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/drawer/redux/DraweActions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/drawer/redux/DraweReducers.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/gateway/AddGateway.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/gateway/DeleteGateway.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/gateway/EditGateway.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/gateway/IndexGateway.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/gateway/ListGateways.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/gateway/SelectedGateway.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/gateway/redux/actions/GatewaysActions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/gateway/redux/reducers/Gateway.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/gateway/redux/reducers/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/pagination/LocalPagination.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/pagination/redux/PaginationActions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/pagination/redux/paginationReducers.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/EmptyComponent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/Navbar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/SelectItemFromUrl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/Sidebar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/Toolbar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/device/AddDeviceComponent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/device/DeleteDeviceComponent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/device/EditDeviceComponent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/device/FormDevice.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/device/IndexDevicesComponent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/device/ListDevicesComponent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/device/SelectedDeviceComponent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/device/redux/actions/DevicesActions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/device/redux/reducers/DevicesReducer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/device/redux/reducers/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/gateway/DeleteGatewayComponent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/gateway/IndexGatewayComponent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/gateway/ListDevicesToAtach.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/models/device.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/device.js" afterDir="false" />
@@ -36,7 +28,21 @@
       <change beforePath="$PROJECT_DIR$/server/routes/devices.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/devices.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/routes/gateways.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/gateways.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/Card.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/Card.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/FormGateway.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/gateway/FormGateway.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/drawer/Drawer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/drawer/Drawer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/gateway/AddGateway.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/gateway/AddGatewayComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/gateway/DeleteGateway.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/gateway/EditGateway.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/gateway/EditGatewayComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/gateway/IndexGateway.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/gateway/ListGateways.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/gateway/ListGatewaysComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/gateway/SelectedGateway.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/gateway/SelectedGatewayComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/gateway/redux/actions/GatewaysActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/gateway/redux/actions/GatewaysActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/gateway/redux/reducers/Gateway.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/gateway/redux/reducers/GatewayReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/gateway/redux/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/gateway/redux/reducers/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pagination/LocalPagination.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pagination/IndexPagination.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +79,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/common" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -80,12 +87,15 @@
     <property name="settings.editor.selected.configurable" value="terminal" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\workspace\musala-test\src\components\common" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\workspace\musala-test\src\components\device" />
+      <recent name="D:\workspace\musala-test\src\components\gateway" />
+      <recent name="D:\workspace\musala-test\src\components\common" />
       <recent name="D:\workspace\musala-test\src\components\pagination" />
       <recent name="D:\workspace\musala-test\src\components\drawer" />
-      <recent name="D:\workspace\musala-test\src\components" />
-      <recent name="D:\workspace\musala-test\src" />
-      <recent name="D:\workspace\musala-test\react-client" />
     </key>
   </component>
   <component name="RunManager">
@@ -115,7 +125,9 @@
       <workItem from="1586164522823" duration="36847000" />
       <workItem from="1586231725825" duration="11896000" />
       <workItem from="1586247375440" duration="3731000" />
-      <workItem from="1586251323580" duration="21877000" />
+      <workItem from="1586251323580" duration="30109000" />
+      <workItem from="1586321782739" duration="31785000" />
+      <workItem from="1586366905850" duration="16969000" />
     </task>
     <servers />
   </component>
@@ -135,33 +147,37 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="414" y="123" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1586169984996" />
-    <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1586266326357">
+    <state width="1345" height="176" key="GridCell.Tab.0.bottom" timestamp="1586384037390">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1586266326357" />
-    <state width="1345" height="179" key="GridCell.Tab.0.center" timestamp="1586266326357">
+    <state width="1345" height="176" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1586384037390" />
+    <state width="1345" height="176" key="GridCell.Tab.0.center" timestamp="1586384037390">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1586266326357" />
-    <state width="1345" height="179" key="GridCell.Tab.0.left" timestamp="1586266326357">
+    <state width="1345" height="176" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1586384037390" />
+    <state width="1345" height="176" key="GridCell.Tab.0.left" timestamp="1586384037390">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1586266326357" />
-    <state width="1345" height="179" key="GridCell.Tab.0.right" timestamp="1586266326357">
+    <state width="1345" height="176" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1586384037390" />
+    <state width="1345" height="176" key="GridCell.Tab.0.right" timestamp="1586384037390">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1586266326357" />
+    <state width="1345" height="176" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1586384037390" />
     <state x="184" y="11" key="SettingsEditor" timestamp="1586097136136">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="184" y="11" key="SettingsEditor/0.0.1366.738@0.0.1366.738" timestamp="1586097136136" />
-    <state x="0" y="0" width="606" height="738" key="find.popup" timestamp="1586269215998">
+    <state x="0" y="0" width="606" height="738" key="find.popup" timestamp="1586339124473">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="0" y="0" width="606" height="738" key="find.popup/0.0.1366.738@0.0.1366.738" timestamp="1586269215998" />
+    <state x="0" y="0" width="606" height="738" key="find.popup/0.0.1366.738@0.0.1366.738" timestamp="1586339124473" />
     <state x="339" y="165" key="run.anything.popup" timestamp="1586194608055">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="339" y="165" key="run.anything.popup/0.0.1366.738@0.0.1366.738" timestamp="1586194608055" />
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1586382130055">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1586382130055" />
   </component>
 </project>

@@ -1,4 +1,4 @@
-import gateway from './Gateway';
+import gateway from './GatewayReducer';
 import {combineReducers} from "redux";
 
 const reducers = combineReducers({

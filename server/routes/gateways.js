@@ -7,10 +7,10 @@ router.get('/', async (req, res, next) => {
     const {id, ...prms} = gatewayFiltersMutation(req.query);
     try {
         if (id) {
-            const withDevices = await GatewayModel.withDevices(id, prms);
-            return res.json(withDevices);
+            const gtw = await GatewayModel.GetById(id);
+            return res.json(gtw);
         } else {
-            const gtws = await GatewayModel.getAll(prms);
+            const gtws = await GatewayModel.GetAll(prms);
             return res.json(gtws);
         }
     } catch (e) {
@@ -23,14 +23,11 @@ router.get('/', async (req, res, next) => {
 });
 
 router.post('/', async (req, res, next) => {
-    const {body} = req;
-    const {id, ...prms} = gatewayMutation(body);
-    const gateway = new GatewayModel(prms);
     try {
-        await gateway.save();
+        const gateway = await GatewayModel.AddGateway(gatewayMutation(req.body));
         return res.json({
             status: 200,
-            message: "ok"
+            gateway: gateway._id
         });
     } catch (e) {
         const error = {
@@ -42,15 +39,12 @@ router.post('/', async (req, res, next) => {
 });
 
 router.put('/', async (req, res, next) => {
-    const {id, serial,...prms} = gatewayMutation(req.body);
     try {
-        if (id) {
-            await GatewayModel.updateOne({_id: id}, prms, {runValidators: true});
-            return res.json({
-                status: 200,
-                message: "ok"
-            });
-        } else throw new Error('Bad request');
+        const gateway = await GatewayModel.EditGateway(gatewayMutation(req.body));
+        return res.json({
+            status: 200,
+            gateway: gateway._id
+        });
     } catch (e) {
         const error = {
             status: 500,
@@ -61,16 +55,12 @@ router.put('/', async (req, res, next) => {
 });
 
 router.delete('/', async (req, res, next) => {
-    const {id} = gatewayMutation(req.body);
     try {
-        if (id) {
-            const gtw = await GatewayModel.findById(id);
-            await gtw.delete();
-            return res.json({
-                status: 200,
-                message: "ok"
-            });
-        } else throw new Error('Bad request');
+        const gateway = await GatewayModel.DeleteGateway(gatewayMutation(req.body));
+        return res.json({
+            status: 200,
+            gateway: gateway._id
+        });
     } catch (e) {
         const error = {
             status: 500,

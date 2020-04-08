@@ -4,8 +4,8 @@ import {FetchGateways, SelectGateway} from "./redux/actions/GatewaysActions";
 import {connect} from "react-redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {SetDrawerContent, SetDrawerVisible} from "../drawer/redux/DraweActions";
-import SelectedGateway from "./SelectedGateway";
-import LocalPagination from "../pagination/LocalPagination";
+import SelectedGateway from "./SelectedGatewayComponent";
+import LocalPagination from "../pagination/IndexPagination";
 
 function TableHead() {
     return <thead>
@@ -20,17 +20,17 @@ function TableHead() {
     </thead>
 }
 
-function ListGateways({
-                          pagination,
-                          visible,
-                          gateways,
-                          total,
-                          funcSetDrawerVisible,
-                          funcSetDrawerContent,
-                          funcFetchGateways,
-                          history,
-                          location
-                      }) {
+function ListGatewaysComponent({
+                                   pagination,
+                                   visible,
+                                   gateways,
+                                   total,
+                                   funcSetDrawerVisible,
+                                   funcSetDrawerContent,
+                                   funcFetchGateways,
+                                   history,
+                                   location
+                               }) {
     const urlSearchParams = new URLSearchParams(location.search);
     const gatewayId = urlSearchParams.has('id') ? urlSearchParams.get('id') : '';
 
@@ -44,19 +44,11 @@ function ListGateways({
         }
     }, [visible]);
 
-    const handleSelect = (id) => {
-        urlSearchParams.set('id', id);
-        history.push({
-            pathname: '/gateways',
-            search: urlSearchParams.toLocaleString()
-        });
-    };
-
     const handleEdit = (id) => {
         urlSearchParams.set('id', id);
         history.push({
             pathname: '/gateways/edit',
-            search: urlSearchParams.toLocaleString()
+            search: urlSearchParams.toString()
         });
     };
 
@@ -64,23 +56,26 @@ function ListGateways({
         urlSearchParams.set('id', id);
         history.push({
             pathname: '/gateways/delete',
-            search: urlSearchParams.toLocaleString()
+            search: urlSearchParams.toString()
         })
     };
 
     const handleSetDrawerVisible = (id) => {
-        handleSelect(id);
+        urlSearchParams.set('id', id);
+        history.push({
+            pathname: '/gateways',
+            search: urlSearchParams.toString()
+        });
         funcSetDrawerVisible(true);
     };
 
     return <div className="table-responsive">
-        <table className="table table-hover table-striped">
+        <table className="table table-hover table-striped  table-sm">
             <TableHead/>
             <tbody>
             {gateways.map((gtw, index) => <tr
                 key={gtw._id}
                 style={{
-                    cursor: "pointer",
                     ...(gatewayId === gtw._id ? {background: 'rgba(0,0,0, 0.6)'} : {}),
                     ...(gatewayId === gtw._id ? {color: '#fff'} : {}),
                 }}
@@ -89,6 +84,9 @@ function ListGateways({
                 <td>{index + 1}</td>
                 <td>
                     <span
+                        style={{
+                            cursor: 'pointer'
+                        }}
                         className="btn-link"
                         onClick={() => handleSetDrawerVisible(gtw._id)}
                     >{gtw.serial}</span>
@@ -102,8 +100,12 @@ function ListGateways({
                 </td>
                 <td className="text-right">
                     <div className="btn-group justify-content-end">
-                        <FontAwesomeIcon color="#117EDD" icon="edit" onClick={() => handleEdit(gtw._id)}/>
-                        <FontAwesomeIcon color="#FF2626" icon="trash" onClick={() => handleDelete(gtw._id)}/>
+                        <span className="btn">
+                            <FontAwesomeIcon color="#117EDD" icon="edit" onClick={() => handleEdit(gtw._id)}/>
+                        </span>
+                        <span className="btn">
+                            <FontAwesomeIcon color="#FF2626" icon="trash" onClick={() => handleDelete(gtw._id)}/>
+                        </span>
                     </div>
                 </td>
             </tr>)}
@@ -114,8 +116,8 @@ function ListGateways({
 }
 
 const mapStateToProps = state => ({
-    gateways: state.gateway.managmentGateways.gateways,
-    total: state.gateway.managmentGateways.total,
+    gateways: state.gateways.managmentGateways.gateways,
+    total: state.gateways.managmentGateways.total,
     visible: state.drawer.visible,
     pagination: state.pagination
 });
@@ -126,4 +128,4 @@ const mapDispatchToProps = dispatch => ({
     funcFetchGateways: (prms) => dispatch(FetchGateways(prms)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ListGateways));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ListGatewaysComponent));

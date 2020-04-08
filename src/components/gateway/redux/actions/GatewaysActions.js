@@ -56,9 +56,10 @@ export const AddGateway = data => async dispatch => {
 };
 
 export const EditGateway = data => async dispatch => {
+    const {_id, ...values} = data;
     dispatch(setEditLoading(true));
     try {
-        await axios.put('gateways', data);
+        await axios.put('gateways', {...values, id: _id});
         dispatch(setEditLoading(false));
     } catch (e) {
         console.error(e)
@@ -68,7 +69,9 @@ export const EditGateway = data => async dispatch => {
 export const DeleteGateway = data => async dispatch => {
     dispatch(setDeleteLoading(true));
     try {
-        await axios.delete('gateways', data);
+        await axios.delete(`gateways`, {
+            data
+        });
         dispatch(setDeleteLoading(false));
     } catch (e) {
         console.error(e)

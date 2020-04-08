@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 const {Schema, model} = mongoose;
 
@@ -16,24 +16,59 @@ const DeviceSchema = new Schema({
     status: {
         type: String,
         enum: ["online", "offline"]
-    },
-    gatewayId: {
-        type: Schema.Types.ObjectId,
-        ref: 'Gateway'
     }
 }, {versionKey: false});
 
-DeviceSchema.statics.getAll = async function (prms) {
+DeviceSchema.statics.getById = async function (id) {
     try {
-        const total = await this.find({}).countDocuments();
-        const list = await this.find({}, null, prms).populate({
-            path: 'gatewayId',
-            select: '-devices'
-        });
+        const device = await this.findById(id).lean();
+        if (!device) throw new Error("Device not exist");
+        return device;
+    } catch (e) {
+        throw e;
+    }
+};
+
+DeviceSchema.statics.getAll = async function (parms) {
+    try {
+        const total = await this.find().countDocuments();
+        const devices = await this.find().setOptions(parms)
         return {
-            data: list,
+            data: devices,
             total
         }
+    } catch (e) {
+        throw e;
+    }
+};
+
+DeviceSchema.statics.AddDevice = async function (values) {
+    const {id, ...params} = values;
+    try {
+        return await this.create(params);
+    } catch (e) {
+        throw e;
+    }
+};
+
+DeviceSchema.statics.EditDevice = async function (values) {
+    const {id, ...params} = values;
+    try {
+        if (!id) throw new Error("Bad request");
+        const device = await this.getById(id);
+        await this.updateOne(device, params, {runValidators: true});
+        return  {_id: id};
+    } catch (e) {
+        throw e;
+    }
+};
+
+DeviceSchema.statics.DeleteDevice = async function (values) {
+    const {id} = values;
+    try {
+        if (!id) throw new Error("Bad request");
+        const device = await this.getById(id);
+        return await this.findByIdAndDelete(device);
     } catch (e) {
         throw e;
     }

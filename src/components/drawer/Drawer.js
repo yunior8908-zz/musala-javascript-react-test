@@ -13,7 +13,7 @@ const StyleDrawer = styled.div`
     transition: width 2s linear;
     background: #fff;
     box-shadow: 2px 2px 8px 2px #666;
-    z-index: 9999;
+    z-index: 999999;
 `;
 
 const StyledCloseButton = styled(FontAwesomeIcon)`

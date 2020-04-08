@@ -17,8 +17,7 @@ const GatewaySchema = new Schema({
             }, message: ({value}) => `Gateway with serials ${value} already exist`
         }
     }, name: {
-        type: String,
-        required: [true, "Name is required"],
+        type: String
     },
     address: {
         type: String,
@@ -30,18 +29,27 @@ const GatewaySchema = new Schema({
             },
             message: ({value}) => `${value} is not a valid ipv4 address`
         }
-    }, devices: {
-        type: [{
-            type: Schema.Types.ObjectId
-        }]
-    }
+    },
+    devices: [{type: Schema.Types.ObjectId, ref: 'Device'}]
 }, {versionKey: false});
 
-GatewaySchema.statics.getAll = async function (prms) {
+GatewaySchema.statics.GetById = async function (id) {
     try {
-        const total = await this.find({}).countDocuments();
-        const list = await this.find({}, null, {...prms, lean: true});
-        const result = list.map(gtw => ({...gtw, devices: gtw.devices.length}));
+        const gtw = await this.findById(id).populate('devices');
+        if (!gtw) throw new Error("Gatewaty not exist");
+        return gtw;
+    } catch (e) {
+        throw e;
+    }
+};
+
+GatewaySchema.statics.GetAll = async function (parms) {
+    try {
+        const total = await this.find().countDocuments();
+        const gtws = await this.find().setOptions(parms).lean();
+        const result = gtws.map(gtw => ({
+            ...gtw, devices: gtw.devices.length
+        }));
         return {
             data: result,
             total
@@ -51,51 +59,72 @@ GatewaySchema.statics.getAll = async function (prms) {
     }
 };
 
-GatewaySchema.methods.AddDevice = async function (device) {
-    try {
-        if (this.devices.length < 10) {
+GatewaySchema.statics.AddGateway = async function (values) {
+    const {id, addDevices, removeDevices, ...params} = values;
 
-            const exist = await this.devices.find(el => el.toString() === device.id.toString());
-            if (!exist) {
-                this.devices.push(device);
-                return await this.updateOne(this);
-            }
-        } else {
-            throw new Error(`The gateway ${this.name} is full of max allowed devices: 10`)
+    try {
+        const gtw = await this.create(params);
+        if (addDevices) {
+            await gtw.AddDevices(addDevices);
         }
+        if (removeDevices) {
+            await gtw.RemoveDevices(removeDevices);
+        }
+        return gtw;
     } catch (e) {
         throw e;
     }
 };
 
-GatewaySchema.methods.RemoveDevice = async function (device) {
+GatewaySchema.statics.EditGateway = async function (values) {
+    const {id, serial, addDevices, removeDevices, ...params} = values;
     try {
-        const exist = await this.devices.find(el => el.toString() === device.id.toString());
-        if (exist) {
-            return await this.devices.remove(device);
-            await this.updateOne(this);
-
-        } else
-            throw new Error("The device not exist")
+        if (!id) throw new Error("Bad request");
+        const gtw = await this.findById(id);
+        await this.updateOne(gtw, params, {runValidators: true});
+        if (addDevices) {
+            await gtw.AddDevices(addDevices);
+        }
+        if (removeDevices) {
+            await gtw.RemoveDevices(removeDevices);
+        }
+        return gtw;
     } catch (e) {
         throw e;
     }
 };
 
-GatewaySchema.statics.withDevices = async function (id, prms) {
+GatewaySchema.statics.DeleteGateway = async function (values) {
+    const {id} = values;
     try {
-        const gtw = await this.findById(id).lean();
-        if (gtw) {
-            const total = await model('Device').find({gatewayId: gtw}).countDocuments();
-            const devices = await model('Device').find({gatewayId: gtw}, null, prms).select('-gatewayId');
-            return {
-                ...gtw,
-                devices: {
-                    list: devices,
-                    total: total
-                }
+        if (!id) throw new Error("Bad request");
+        return await this.findByIdAndDelete(id);
+    } catch (e) {
+        throw e;
+    }
+};
+
+GatewaySchema.methods.AddDevices = async function (devices) {
+    try {
+        if (this.devices.length >= 10) throw new Error('This gatewat already have 10 devices');
+        if (devices.length > 10 ) throw new Error("The devices attached exceed the max of devices in a gateway")
+        devices.map(async id => {
+            if (id && !this.devices.includes(id)) {
+                this.devices.push(id);
             }
-        } else throw new Error('That item not exist');
+            await this.updateOne(this);
+        })
+    } catch (e) {
+        throw e;
+    }
+};
+
+GatewaySchema.methods.RemoveDevices = async function (devices) {
+    try {
+        devices.map(async id => {
+            this.devices.remove(id);
+            await this.updateOne(this);
+        })
     } catch (e) {
         throw e;
     }

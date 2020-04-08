@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react";
-import FormGateway from "../common/FormGateway";
+import FormGateway from "./FormGateway";
 import {connect} from "react-redux";
 import {EditGateway} from "./redux/actions/GatewaysActions";
 
-function EditGatewayComponent({history, gateway, loading, funcEditGateway}) {
+function EditGatewayComponent({history, location, gateway, loading, funcEditGateway}) {
     const [afterLoading, setAfterLoading] = useState(false);
+    const urlSearchParams = new URLSearchParams(location.search);
 
     useEffect(() => {
         if (afterLoading === true && loading === false) {
@@ -21,12 +22,22 @@ function EditGatewayComponent({history, gateway, loading, funcEditGateway}) {
         funcEditGateway(values);
     };
 
-    return <FormGateway editGateway={gateway || {}} cancelForm={handlerCancelar} saveValues={onSubmit}/>
+    const handleDelete = (id) => {
+        urlSearchParams.set('id', id);
+        history.push({
+            pathname: '/devices/delete',
+            search: urlSearchParams.toString()
+        })
+    };
+
+    return <>
+        <FormGateway title="Editar gateway" editGateway={gateway} cancelForm={handlerCancelar} saveValues={onSubmit} handleDelete={handleDelete}/>
+    </>
 };
 
 const mapStateToProps = state => ({
-    loading: state.gateway.managmentGateways.loadingEdit,
-    gateway: state.gateway.managmentGateways.gateway
+    loading: state.gateways.managmentGateways.loadingEdit,
+    gateway: state.gateways.managmentGateways.gateway
 });
 
 const mapDispatchToProps = dispatch => ({

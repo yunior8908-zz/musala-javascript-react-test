@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import {AddGateway} from "./redux/actions/GatewaysActions";
-import FormGateway from "../common/FormGateway";
+import FormGateway from "./FormGateway";
 
 const AddGatewayComponent = ({history, loading, funcAddGateway}) => {
     const [afterLoading, setAfterLoading] = useState(false);
 
-    useEffect(()=> {
-        if(afterLoading === true && loading === false){
+    useEffect(() => {
+        if (afterLoading === true && loading === false) {
             history.push('/gateways')
         }
         setAfterLoading(loading);
@@ -21,12 +21,12 @@ const AddGatewayComponent = ({history, loading, funcAddGateway}) => {
         funcAddGateway(values);
     };
 
-    return <FormGateway cancelForm={handlerCancelar} saveValues={onSubmit}/>
+    return <FormGateway title={"Insertar gateway"} cancelForm={handlerCancelar} saveValues={onSubmit}/>
 
 };
 
 const mapStateToProps = state => ({
-    loading: state.gateway.managmentGateways.loadingAdd
+    loading: state.gateways.managmentGateways.loadingAdd
 });
 
 const mapDispatchToProps = dispatch => ({
