@@ -1,0 +1,8 @@
+package-lock.json
+yarn.lock
+yarn-error.log
+
+.idea/*
+
+/node_modules
+/build
