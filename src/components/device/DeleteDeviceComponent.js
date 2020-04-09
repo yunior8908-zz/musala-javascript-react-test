@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Card from "../common/Card";
 import {connect} from "react-redux";
-import {DeleteDevice} from "./redux/actions/DevicesActions";
+import {DeleteDevice} from "./redux/DevicesActions";
 
 function DeleteDeviceComponent({device, loading, history, funcDeleteDevice}) {
     const [afterLoading, setAfterLoading] = useState(false);
@@ -11,7 +11,7 @@ function DeleteDeviceComponent({device, loading, history, funcDeleteDevice}) {
             history.push('/devices')
         }
         setAfterLoading(loading);
-    }, [loading]);
+    }, [afterLoading, history, loading]);
 
     const cancelForm = () => {
         history.push('/devices')
@@ -45,8 +45,8 @@ function DeleteDeviceComponent({device, loading, history, funcDeleteDevice}) {
 };
 
 const mapStateToProps = state => ({
-    device: state.devices.managmentDevices.device,
-    loading: state.devices.managmentDevices.loadingDelete
+    device: state.devices.device,
+    loading: state.devices.loadingDelete
 });
 
 const mapDispatchToProps = dispatch => ({

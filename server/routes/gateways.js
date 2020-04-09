@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const GatewayModel = require('../models/gateway');
 
-const {gatewayMutation, gatewayFiltersMutation} = require('../mutation');
+const {gatewayMutation, gatewayFiltersMutation} = require('../mutations');
 
 router.get('/', async (req, res, next) => {
     const {id, ...prms} = gatewayFiltersMutation(req.query);

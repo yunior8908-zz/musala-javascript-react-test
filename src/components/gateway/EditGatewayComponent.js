@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import FormGateway from "./FormGateway";
 import {connect} from "react-redux";
-import {EditGateway} from "./redux/actions/GatewaysActions";
+import {EditGateway} from "./redux/GatewaysActions";
 
 function EditGatewayComponent({history, location, gateway, loading, funcEditGateway}) {
     const [afterLoading, setAfterLoading] = useState(false);
@@ -12,7 +12,7 @@ function EditGatewayComponent({history, location, gateway, loading, funcEditGate
             history.push('/gateways')
         }
         setAfterLoading(loading);
-    }, [loading]);
+    }, [afterLoading, history, loading]);
 
     const handlerCancelar = () => {
         history.push('/gateways');
@@ -36,8 +36,8 @@ function EditGatewayComponent({history, location, gateway, loading, funcEditGate
 };
 
 const mapStateToProps = state => ({
-    loading: state.gateways.managmentGateways.loadingEdit,
-    gateway: state.gateways.managmentGateways.gateway
+    loading: state.gateways.loadingEdit,
+    gateway: state.gateways.gateway
 });
 
 const mapDispatchToProps = dispatch => ({

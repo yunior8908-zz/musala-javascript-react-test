@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import styled from 'styled-components';
 import EmptyComponent from "../common/EmptyComponent";
-import ListDevicesToAtach from "./ListDevicesToAtach";
+import ListGatewayDevices from "./ListGatewayDevices";
 
 const StyledDivGatewayDetails = styled.div`
     border: dotted 1px #ccc;
@@ -13,21 +13,21 @@ const StyledDivGatewayDetails = styled.div`
     font-size: 12px;
 `;
 
-function SelectedGatewayComponent({gateway}) {
+const SelectedGatewayComponent = ({gtw}) => {
     return <>
-        {gateway ? <>
+        {gtw ? <>
             <StyledDivGatewayDetails>
-                <label>Serial: <strong>{gateway.serial}</strong></label>
-                <label>Name: <strong>{gateway.name}</strong></label>
-                <label>Ipv4 Address: <strong>{gateway.address}</strong></label>
+                <label>Serial: <strong>{gtw.serial}</strong></label>
+                <label>Name: <strong>{gtw.name}</strong></label>
+                <label>Ipv4 Address: <strong>{gtw.address}</strong></label>
             </StyledDivGatewayDetails>
-            <ListDevicesToAtach checkable={false}/>
+            <ListGatewayDevices gateway={gtw}/>
         </> : <EmptyComponent/>}
     </>
 };
 
 const mapStateToProps = state => ({
-    gateway: state.gateways.managmentGateways.gateway
+    gtw: state.gateways.gateway
 });
 
 export default connect(

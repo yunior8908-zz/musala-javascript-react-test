@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
-import {AddDevice} from "./redux/actions/DevicesActions";
+import {AddDevice} from "./redux/DevicesActions";
 import FormDevice from "./FormDevice";
 
 const AddDeviceComponent = ({history, loading, funcAddDevice}) => {
@@ -11,7 +11,7 @@ const AddDeviceComponent = ({history, loading, funcAddDevice}) => {
             history.push('/devices')
         }
         setAfterLoading(loading);
-    }, [loading]);
+    }, [afterLoading, history, loading]);
 
     const handlerCancelar = () => {
         history.push('/devices');
@@ -21,12 +21,12 @@ const AddDeviceComponent = ({history, loading, funcAddDevice}) => {
         funcAddDevice(values);
     };
 
-    return <FormDevice title={"Insert a device"} cancelForm={handlerCancelar} saveValues={onSubmit}/>
+    return <FormDevice title={"Add a device"} cancelForm={handlerCancelar} saveValues={onSubmit}/>
 
 };
 
 const mapStateToProps = state => ({
-    loading: state.devices.managmentDevices.loadingAdd
+    loading: state.devices.loadingAdd
 });
 
 const mapDispatchToProps = dispatch => ({

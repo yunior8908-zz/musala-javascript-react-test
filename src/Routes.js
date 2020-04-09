@@ -1,10 +1,11 @@
 import React, {lazy, Suspense} from "react";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import Drawer from "./components/drawer/Drawer";
 import Sidebar from "./components/common/Sidebar";
 import Navbar from "./components/common/Navbar";
 import SelectItemFromUrl from "./components/common/SelectItemFromUrl";
 import styled from "styled-components";
+import MessagesComponent from "./components/messages/MessagesComponent";
 
 const GatewysComponent = lazy(() => import('./components/gateway/IndexGatewayComponent'));
 const GatewysAddComponent = lazy(() => import('./components/gateway/AddGatewayComponent'));
@@ -35,9 +36,14 @@ function Routes(props) {
                 marginTop: 45
             }}>
                 <Sidebar/>
-                <Suspense fallback={<div className="spinner-grow"></div>}>
+
+                <Suspense fallback={<div className="spinner-grow"/>}>
                     <StyledMain>
+                        <MessagesComponent />
                         <Switch>
+                            <Route path="/" exact>
+                                <Redirect to="/gateways"/>
+                            </Route>
                             <Route path="/gateways" exact component={props => <GatewysComponent {...props} />}/>
                             <Route path="/gateways/add" exact component={props => <GatewysAddComponent {...props} />}/>
                             <Route path="/gateways/edit" exact

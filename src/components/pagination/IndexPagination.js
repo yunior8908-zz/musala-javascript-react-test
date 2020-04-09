@@ -1,14 +1,14 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Pagination from "react-paginating";
 import {connect} from "react-redux";
 import styled from 'styled-components';
-import {SetPaginationPage, SetPaginationPageSize} from "./redux/PaginationActions";
+import {ResetPagination, SetPaginationPage, SetPaginationPageSize} from "./redux/PaginationActions";
 
 const StyledPageLink = styled.span`
     cursor: pointer;
 `;
 
-function IndexPagination({total, page, pageSize, funcSetPaginationPage, funcSetPaginationPageSize}) {
+function IndexPagination({total, page, pageSize, funcSetPaginationPage, funcSetPaginationPageSize, funcResetPaginat}) {
     const handlePageChange = page => {
         funcSetPaginationPage(page);
     };
@@ -16,6 +16,12 @@ function IndexPagination({total, page, pageSize, funcSetPaginationPage, funcSetP
     const handleChangeLimit = e => {
         funcSetPaginationPageSize(Number(e.target.value));
     };
+
+    useEffect(()=> {
+        return ()=> {
+            funcResetPaginat();
+        }
+    }, [funcResetPaginat])
 
     return <>
         {total > 0 && <Pagination
@@ -125,6 +131,7 @@ const mapStateToProps = state => {
 const mapDispatchtoProps = dispatch => ({
     funcSetPaginationPage: (page) => dispatch(SetPaginationPage(page)),
     funcSetPaginationPageSize: (pageSize) => dispatch(SetPaginationPageSize(pageSize)),
+    funcResetPaginat: () => dispatch(ResetPagination()),
 });
 
 export default connect(mapStateToProps, mapDispatchtoProps)(IndexPagination);

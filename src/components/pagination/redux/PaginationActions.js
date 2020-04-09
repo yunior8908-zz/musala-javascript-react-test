@@ -8,10 +8,18 @@ const setPageSize = pageSize => ({
     pageSize
 });
 
+const resetPagination = ()=> ({
+    type: 'RESET_PAGINATION'
+});
+
 export const SetPaginationPage = page => dispatch => {
     dispatch(setPage(page))
 };
 
 export const SetPaginationPageSize = pageSize => dispatch => {
     dispatch(setPageSize(pageSize));
+};
+
+export const ResetPagination = () => dispatch => {
+    dispatch(resetPagination());
 };

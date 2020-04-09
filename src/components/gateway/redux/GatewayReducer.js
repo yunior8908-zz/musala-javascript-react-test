@@ -14,7 +14,7 @@ export default (state = initialState, action)=> {
             return {
                 ...state, gateways: action.gateways, total: action.total
             };
-        case 'SELECT_FROM_LIST':
+        case 'SELECTED_GATEWAY':
             return {
                 ...state, gateway: action.gateway
             };

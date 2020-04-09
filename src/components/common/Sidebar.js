@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import styled from "styled-components";
 import {NavLink} from "react-router-dom";
 
@@ -22,8 +22,12 @@ const StyledSidebar = styled.div`
 
 function Sidebar(){
     return <StyledSidebar>
-        <NavLink to="/gateways" >gateways</NavLink>
-        <NavLink to="/devices" >devices</NavLink>
+        <NavLink to="/gateways" activeStyle={{
+            borderBottom: 'solid 2px #ccc'
+        }} >gateways</NavLink>
+        <NavLink to="/devices"  activeStyle={{
+            borderBottom: 'solid 2px #ccc'
+        }} ><span>devices</span></NavLink>
     </StyledSidebar>
 }
 

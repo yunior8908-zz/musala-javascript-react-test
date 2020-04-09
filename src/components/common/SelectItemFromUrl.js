@@ -1,24 +1,24 @@
-import React, { useEffect } from "react";
+import {useEffect} from "react";
 import {withRouter} from 'react-router-dom';
 import {connect} from "react-redux";
-import {SelectGateway} from "../gateway/redux/actions/GatewaysActions";
-import {SelectDevices} from "../device/redux/actions/DevicesActions";
+import {SelectGateway} from "../gateway/redux/GatewaysActions";
+import {SelectDevices} from "../device/redux/DevicesActions";
 
 const SelectItemFromUrl = ({location, functSelectGateway, funcSelectDevices}) => {
     const urlSearchParams = new URLSearchParams(location.search);
+
     useEffect(() => {
         if (urlSearchParams.has('id')) {
             const splt = location.pathname.split("/");
-            if(splt.includes("gateways")) {
+            if (splt.includes("gateways")) {
                 functSelectGateway(urlSearchParams.get('id'));
             }
-            if(splt.includes("devices")) {
+            if (splt.includes("devices")) {
                 funcSelectDevices(urlSearchParams.get('id'));
             }
         }
-    }, [location]);
-
-    return <div/>;
+    }, [funcSelectDevices, functSelectGateway, location, urlSearchParams]);
+    return null;
 };
 
 const mapDispatchToProps = dispatch => ({

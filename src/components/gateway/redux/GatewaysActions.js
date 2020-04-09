@@ -1,4 +1,5 @@
-import axios from '../../../../apiConfig';
+import axios from '../../../apiConfig';
+import {SetTextMessage} from "../../messages/redux/MessagesActions";
 
 const fetchedGateways = data => ({
     type: 'FETCH_LIST_GATEWAYS',
@@ -7,7 +8,7 @@ const fetchedGateways = data => ({
 });
 
 const selectedGateway = data => ({
-    type: 'SELECT_FROM_LIST',
+    type: 'SELECTED_GATEWAY',
     gateway: data
 });
 
@@ -32,7 +33,7 @@ export const FetchGateways = (prms) => async dispatch => {
         const response = await axios.get(`gateways${query && `?${query}`}`);
         dispatch(fetchedGateways(response.data));
     } catch (e) {
-        console.error(e);
+        dispatch(SetTextMessage(e.response ? e.response.data.message : e.message, 'gateways'));
     }
 };
 
@@ -41,7 +42,7 @@ export const SelectGateway = id => async dispatch => {
         const response = await axios.get(`gateways?id=${id}`);
         dispatch(selectedGateway(response.data));
     } catch (e) {
-        console.error(e);
+        dispatch(SetTextMessage(e.response ? e.response.data.message : e.message, 'gateways'));
     }
 };
 
@@ -51,7 +52,7 @@ export const AddGateway = data => async dispatch => {
         await axios.post('gateways', data);
         dispatch(setAddLoading(false));
     } catch (e) {
-        console.error()
+        dispatch(SetTextMessage(e.response ? e.response.data.message : e.message, 'gateways'));
     }
 };
 
@@ -62,7 +63,7 @@ export const EditGateway = data => async dispatch => {
         await axios.put('gateways', {...values, id: _id});
         dispatch(setEditLoading(false));
     } catch (e) {
-        console.error(e)
+        dispatch(SetTextMessage(e.response ? e.response.data.message : e.message, 'gateways'));
     }
 };
 
@@ -74,7 +75,7 @@ export const DeleteGateway = data => async dispatch => {
         });
         dispatch(setDeleteLoading(false));
     } catch (e) {
-        console.error(e)
+        dispatch(SetTextMessage(e.response ? e.response.data.message : e.message, 'gateways'));
     }
 };
 

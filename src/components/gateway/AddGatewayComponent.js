@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
-import {AddGateway} from "./redux/actions/GatewaysActions";
+import {AddGateway} from "./redux/GatewaysActions";
 import FormGateway from "./FormGateway";
 
 const AddGatewayComponent = ({history, loading, funcAddGateway}) => {
@@ -11,7 +11,7 @@ const AddGatewayComponent = ({history, loading, funcAddGateway}) => {
             history.push('/gateways')
         }
         setAfterLoading(loading);
-    }, [loading]);
+    }, [afterLoading, history, loading]);
 
     const handlerCancelar = () => {
         history.push('/gateways');
@@ -21,12 +21,12 @@ const AddGatewayComponent = ({history, loading, funcAddGateway}) => {
         funcAddGateway(values);
     };
 
-    return <FormGateway title={"Insertar gateway"} cancelForm={handlerCancelar} saveValues={onSubmit}/>
+    return <FormGateway title={"Add gateway"} cancelForm={handlerCancelar} saveValues={onSubmit}/>
 
 };
 
 const mapStateToProps = state => ({
-    loading: state.gateways.managmentGateways.loadingAdd
+    loading: state.gateways.loadingAdd
 });
 
 const mapDispatchToProps = dispatch => ({

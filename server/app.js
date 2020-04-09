@@ -16,6 +16,7 @@ mongoose.connect(`mongodb://localhost/musalatest`, mongoConnectionOptions)
 .catch(err=> console.error(err));
 
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const routes = require('./routes');
@@ -45,3 +46,5 @@ app.use((err, req, res, next)=> {
 app.listen(8000, function() {
     console.log(`server runing for a port 8000`);
 });
+
+module.exports = app;

@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const DeviceModel = require('../models/device');
 
-const {deviceMutation, deviceFiltersMutation} = require('../mutation');
+const {deviceMutation, deviceFiltersMutation} = require('../mutations');
 
 router.get('/', async (req, res, next) => {
     const {id, ...prms} = deviceFiltersMutation(req.query);

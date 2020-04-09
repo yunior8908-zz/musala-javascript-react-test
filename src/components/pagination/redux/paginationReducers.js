@@ -13,6 +13,8 @@ export default (state = inititalState, action) => {
             return {
                 ...state, pageSize: action.pageSize, page: 1
             };
+        case 'RESET_PAGINATION':
+            return inititalState
         default:
             return state;
     }

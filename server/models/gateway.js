@@ -24,7 +24,6 @@ const GatewaySchema = new Schema({
         required: [true, "the ipv4 address is required"],
         validate: {
             validator: (v) => {
-                console.log(v);
                 return /\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}\b/.test(v);
             },
             message: ({value}) => `${value} is not a valid ipv4 address`
@@ -82,11 +81,11 @@ GatewaySchema.statics.EditGateway = async function (values) {
         if (!id) throw new Error("Bad request");
         const gtw = await this.findById(id);
         await this.updateOne(gtw, params, {runValidators: true});
-        if (addDevices) {
-            await gtw.AddDevices(addDevices);
-        }
         if (removeDevices) {
             await gtw.RemoveDevices(removeDevices);
+        }
+        if (addDevices) {
+            await gtw.AddDevices(addDevices);
         }
         return gtw;
     } catch (e) {
@@ -105,9 +104,11 @@ GatewaySchema.statics.DeleteGateway = async function (values) {
 };
 
 GatewaySchema.methods.AddDevices = async function (devices) {
+    const serverCant = this.devices.length;
+    const cant = devices.length;
     try {
-        if (this.devices.length >= 10) throw new Error('This gatewat already have 10 devices');
-        if (devices.length > 10 ) throw new Error("The devices attached exceed the max of devices in a gateway")
+        if (serverCant >= 10) throw new Error('This gatewat already have 10 devices');
+        if (cant + serverCant > 10 ) throw new Error("The devices attached exceed the max of devices in a gateway")
         devices.map(async id => {
             if (id && !this.devices.includes(id)) {
                 this.devices.push(id);

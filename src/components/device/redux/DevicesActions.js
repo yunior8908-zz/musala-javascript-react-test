@@ -1,4 +1,5 @@
-import axios from '../../../../apiConfig';
+import axios from '../../../apiConfig';
+import {SetTextMessage} from "../../messages/redux/MessagesActions";
 
 const setListDevicesLoading = () => ({
     type: 'FETCH_LIST_DEVICES_LOADING'
@@ -35,7 +36,7 @@ export const SelectDevices= (id) => async dispatch => {
         const response = await axios.get(`/devices?id=${id}`);
         dispatch(setSelectedDevice(response.data));
     }catch (e) {
-        console.error(e)
+        dispatch(SetTextMessage(e.response ? e.response.data.message : e.message, 'devices'));
     }
 };
 
@@ -46,7 +47,7 @@ export const FetchListDevices = params => async dispatch => {
         const response = await axios.get(`devices${query && `?${query}`}`);
         dispatch(setListDevices(response.data));
     } catch (e) {
-        console.error(e);
+        dispatch(SetTextMessage(e.response ? e.response.data.message : e.message, 'devices'));
     }
 };
 
@@ -56,7 +57,7 @@ export const AddDevice = values => async dispatch => {
         await axios.post('devices', values);
         dispatch(setAddLoading(false));
     }catch (e) {
-        console.error(e)
+        dispatch(SetTextMessage(e.response ? e.response.data.message : e.message, 'devices'));
     }
 };
 
@@ -67,7 +68,7 @@ export const EditDevice = data => async dispatch => {
         await axios.put('devices', {...values, id: _id});
         dispatch(setEditLoading(false));
     } catch (e) {
-        console.error(e)
+        dispatch(SetTextMessage(e.response ? e.response.data.message : e.message, 'devices'));
     }
 };
 
@@ -79,6 +80,6 @@ export const DeleteDevice = data => async dispatch => {
         });
         dispatch(setDeleteLoading(false));
     }catch (e) {
-        console.error(e)
+        dispatch(SetTextMessage(e.response ? e.response.data.message : e.message, 'devices'));
     }
 };

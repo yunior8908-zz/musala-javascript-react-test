@@ -19,7 +19,7 @@ function IndexDevicesComponent({total, history}) {
 }
 
 const mapStateToProps = state => ({
-    total: state.devices.managmentDevices.total
+    total: state.devices.total
 });
 
 export default connect(mapStateToProps)(IndexDevicesComponent);

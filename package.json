@@ -31,11 +31,12 @@
     "styled-components": "^5.0.1"
   },
   "scripts": {
-    "dev": "concurrently --kill-others \"npm run start-server\" \"npm run start-client\"",
-    "start-client": "react-scripts start",
-    "start-server": "nodemon ./server/app.js",
+    "dev": "concurrently --kill-others \"npm run start:server\" \"npm run start:client\"",
+    "start:client": "react-scripts start",
+    "start:server": "nodemon ./server/app.js",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test:client": "react-scripts test",
+    "test:server": "jest ./server",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -55,7 +56,12 @@
   },
   "devDependencies": {
     "concurrently": "^5.1.0",
-    "dotenv": "^8.2.0",
-    "nodemon": "^2.0.2"
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-to-json": "^3.4.4",
+    "eslint": "^6.8.0",
+    "jest": "24.9.0",
+    "nodemon": "^2.0.2",
+    "supertest": "^4.0.2"
   }
 }

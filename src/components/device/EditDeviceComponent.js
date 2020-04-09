@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import FormDevice from "./FormDevice";
 import {connect} from "react-redux";
-import {EditDevice} from "./redux/actions/DevicesActions";
+import {EditDevice} from "./redux/DevicesActions";
 
 function EditDeviceComponent({history, location, device, loading, funcEditDevice}) {
     const [afterLoading, setAfterLoading] = useState(false);
@@ -12,7 +12,7 @@ function EditDeviceComponent({history, location, device, loading, funcEditDevice
             history.push('/devices')
         }
         setAfterLoading(loading);
-    }, [loading]);
+    }, [afterLoading, history, loading]);
 
     const handlerCancelar = () => {
         history.push('/devices');
@@ -36,8 +36,8 @@ function EditDeviceComponent({history, location, device, loading, funcEditDevice
 };
 
 const mapStateToProps = state => ({
-    loading: state.devices.managmentDevices.loadingEdit,
-    device: state.devices.managmentDevices.device
+    loading: state.devices.loadingEdit,
+    device: state.devices.device
 });
 
 const mapDispatchToProps = dispatch => ({

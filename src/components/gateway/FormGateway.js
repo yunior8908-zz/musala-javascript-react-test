@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from "react";
 import Card from "../common/Card";
 import {useForm} from "react-hook-form";
-import ListDevicesToAtach from "./ListDevicesToAtach";
+import ListDevicesComponent from "../device/ListDevicesComponent";
 
 function FormGateway({title, editGateway, cancelForm, saveValues, handleDelete}) {
+    const {handleSubmit, register, errors, setError, clearError, setValue} = useForm();
     const [devicesChecked, setDevicesChecked] = useState([]);
     const [addDevices, setAddDevices] = useState([]);
     const [removeDevices, setRemoveDevices] = useState([]);
+    const [cant, setCant] = useState(0);
 
     useEffect(() => {
         if (editGateway) {
@@ -14,21 +16,34 @@ function FormGateway({title, editGateway, cancelForm, saveValues, handleDelete})
             const ad = devicesChecked.filter(i => !editGateway.devices.some(dv => dv._id === i));
             setRemoveDevices(rd);
             setAddDevices(ad);
-        }else {
+        } else {
             setAddDevices(devicesChecked)
         }
-    }, [devicesChecked]);
+    }, [devicesChecked, editGateway]);
+
+    useEffect(() => {
+        setCant(editGateway ? editGateway.devices.length + addDevices.length - removeDevices.length : 0);
+    }, [devicesChecked, addDevices, removeDevices, editGateway]);
+
+    useEffect(() => {
+        if (cant > 10) {
+            setError("devices", "max", "It should be less than 10 devices");
+        }else{
+            clearError('devices');
+        }
+    }, [cant, clearError, setError]);
 
     useEffect(() => {
         if (editGateway) {
             setValue(Object.keys(editGateway).map(k => ({[k]: editGateway[k]})));
             setDevicesChecked(editGateway.devices.map(d => d._id));
         }
-    }, [editGateway]);
-    const {handleSubmit, register, errors, setValue} = useForm();
+    }, [editGateway, setValue]);
 
     const onSubmit = (values) => {
-        saveValues(values);
+        if (Object.keys(errors) < 1) {
+            saveValues(values);
+        }
     };
 
     const onDelete = () => {
@@ -115,8 +130,15 @@ function FormGateway({title, editGateway, cancelForm, saveValues, handleDelete})
                         className={`${errors.address ? 'invalid' : 'valid'}-feedback`}>{errors.address && errors.address.message}</div>
                 </div>
                 <div className="col col-12">
-                    <strong>{`Total devices: (${0})`}</strong>
-                    <ListDevicesToAtach devicesChecked={devicesChecked} setDevicesChecked={setDevicesChecked}/>
+                    <span>
+                        <strong>{`Total devices: (${cant}). `}</strong>
+                        <span className={`${errors.devices ? 'text-danger' : ''}`}>{`${errors.devices ? errors.devices.message : ''}`}</span>
+                    </span>
+                    <ListDevicesComponent
+                        formControl
+                        devicesChecked={devicesChecked}
+                        setDevicesChecked={setDevicesChecked}
+                    />
                 </div>
             </div>
         </form>}

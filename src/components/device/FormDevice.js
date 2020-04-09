@@ -3,12 +3,14 @@ import Card from "../common/Card";
 import {useForm} from "react-hook-form";
 
 function FormDevice({title, editDevice, cancelForm, saveValues, handleDelete}) {
+    const {handleSubmit, register, errors, setValue} = useForm();
+
     useEffect(() => {
         if (editDevice) {
             setValue(Object.keys(editDevice).map(k => ({[k]: editDevice[k]})));
         }
-    }, [editDevice]);
-    const {handleSubmit, register, errors, setValue} = useForm();
+    }, [editDevice, setValue]);
+
 
     const onSubmit = (values) => {
         saveValues(values);
@@ -19,7 +21,7 @@ function FormDevice({title, editDevice, cancelForm, saveValues, handleDelete}) {
     };
 
     return <Card
-        col={6}
+        col={12}
         title={title}
         footer={<div className="form-row justify-content-end">
             <div className="col-auto">
@@ -32,12 +34,12 @@ function FormDevice({title, editDevice, cancelForm, saveValues, handleDelete}) {
                 <button className="btn btn-primary btn-sm" onClick={handleSubmit(onSubmit)}>Aceptar</button>
             </div>
         </div>}
-        body={<form>
+        body={<form className="row">
             <input
                 ref={register()}
                 type="hidden" name="_id"
             />
-            <div className="form-group small">
+            <div className="form-group small col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <label>UID:</label>
                 <input
                     ref={register({
@@ -54,7 +56,7 @@ function FormDevice({title, editDevice, cancelForm, saveValues, handleDelete}) {
                 <div
                     className={`${errors.uid ? 'invalid' : 'valid'}-feedback`}>{errors.uid && errors.uid.message}</div>
             </div>
-            <div className="form-group small">
+            <div className="form-group small col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <label>Vendor:</label>
                 <input
                     ref={register()}
@@ -65,7 +67,7 @@ function FormDevice({title, editDevice, cancelForm, saveValues, handleDelete}) {
                 <div
                     className={`${errors.name ? 'invalid' : 'valid'}-feedback`}>{errors.vendor && errors.vendor.message}</div>
             </div>
-            <div className="form-group small">
+            <div className="form-group small col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <label>Status:</label>
                 <select
                     ref={register({

@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {withRouter} from 'react-router-dom';
-import {FetchGateways, SelectGateway} from "./redux/actions/GatewaysActions";
+import {FetchGateways} from "./redux/GatewaysActions";
 import {connect} from "react-redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {SetDrawerContent, SetDrawerVisible} from "../drawer/redux/DraweActions";
@@ -22,7 +22,6 @@ function TableHead() {
 
 function ListGatewaysComponent({
                                    pagination,
-                                   visible,
                                    gateways,
                                    total,
                                    funcSetDrawerVisible,
@@ -34,15 +33,15 @@ function ListGatewaysComponent({
     const urlSearchParams = new URLSearchParams(location.search);
     const gatewayId = urlSearchParams.has('id') ? urlSearchParams.get('id') : '';
 
-    useEffect(() => {
-        funcFetchGateways({page: pagination.page - 1, pageSize: pagination.pageSize});
-    }, [pagination]);
+    useEffect(()=> {
+        return ()=>{
+            funcSetDrawerVisible(false);
+        }
+    }, [funcSetDrawerVisible]);
 
     useEffect(() => {
-        if (visible) {
-            funcSetDrawerContent(<SelectedGateway/>)
-        }
-    }, [visible]);
+        funcFetchGateways({page: pagination.page - 1, pageSize: pagination.pageSize});
+    }, [funcFetchGateways, pagination]);
 
     const handleEdit = (id) => {
         urlSearchParams.set('id', id);
@@ -67,6 +66,7 @@ function ListGatewaysComponent({
             search: urlSearchParams.toString()
         });
         funcSetDrawerVisible(true);
+        funcSetDrawerContent(<SelectedGateway/>);
     };
 
     return <div className="table-responsive">
@@ -116,9 +116,8 @@ function ListGatewaysComponent({
 }
 
 const mapStateToProps = state => ({
-    gateways: state.gateways.managmentGateways.gateways,
-    total: state.gateways.managmentGateways.total,
-    visible: state.drawer.visible,
+    gateways: state.gateways.gateways,
+    total: state.gateways.total,
     pagination: state.pagination
 });
 

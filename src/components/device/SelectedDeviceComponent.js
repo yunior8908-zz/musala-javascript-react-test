@@ -20,7 +20,7 @@ function SelectedDeviceComponent ({ device }) {
 }
 
 const mapStateToProps = state => ({
-    device: state.devices.managmentDevices.device
+    device: state.devices.device
 });
 
 export default connect(mapStateToProps)(SelectedDeviceComponent);

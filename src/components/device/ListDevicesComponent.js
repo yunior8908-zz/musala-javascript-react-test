@@ -2,38 +2,37 @@ import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import {withRouter} from 'react-router-dom';
 import moment from 'moment';
-import {FetchListDevices} from "./redux/actions/DevicesActions";
+import {FetchListDevices} from "./redux/DevicesActions";
 import {SetDrawerContent, SetDrawerVisible} from "../drawer/redux/DraweActions";
 import SelectedDevice from "./SelectedDeviceComponent";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import IndexPagination from "../pagination/IndexPagination";
 
-function TableHeader() {
-    return <thead>
-    <tr>
-        <th>No.</th>
-        <th className="text-center">UID</th>
-        <th className="text-center">VENDOR</th>
-        <th className="text-center">CREATED</th>
-        <th className="text-center">STATUS</th>
-        <th></th>
-    </tr>
-    </thead>
-}
-
-function ListDevicesComponent({pagination, devices, visible, total, history, location, funcSetDrawerVisible, funcSetDrawerContent, funcFetchListDevices}) {
+function ListDevicesComponent({
+                                  pagination,
+                                  devices,
+                                  total,
+                                  history,
+                                  location,
+                                  funcSetDrawerVisible,
+                                  funcSetDrawerContent,
+                                  funcFetchListDevices,
+                                  formControl = false,
+                                  devicesChecked,
+                                  setDevicesChecked
+                              }) {
     const urlSearchParams = new URLSearchParams(location.search);
     const deviceId = urlSearchParams.has('id') ? urlSearchParams.get('id') : '';
 
-    useEffect(() => {
-        funcFetchListDevices({page: pagination.page - 1, pageSize: pagination.pageSize});
-    }, [pagination]);
+    useEffect(()=> {
+        return ()=>{
+            funcSetDrawerVisible(false);
+        }
+    }, [funcSetDrawerVisible]);
 
     useEffect(() => {
-        if (visible) {
-            funcSetDrawerContent(<SelectedDevice/>)
-        }
-    }, [visible]);
+        funcFetchListDevices({page: pagination.page - 1, pageSize: pagination.pageSize});
+    }, [funcFetchListDevices, pagination]);
 
     const handleLinkClick = (id) => {
         urlSearchParams.set('id', id);
@@ -42,6 +41,25 @@ function ListDevicesComponent({pagination, devices, visible, total, history, loc
             search: urlSearchParams.toString()
         });
         funcSetDrawerVisible(true);
+        funcSetDrawerContent(<SelectedDevice/>);
+    };
+
+    const handleOnchange = (ev) => {
+        const {value, checked} = ev.target;
+        if (checked) {
+            setDevicesChecked([...devicesChecked, value]);
+        } else {
+            setDevicesChecked(devicesChecked.filter(dc => dc !== value));
+        }
+    };
+
+    const handleSelectAllInPage = (ev) => {
+        const {checked} = ev.target;
+        if (checked) {
+            setDevicesChecked([...devicesChecked, ...devices.map(device => device._id)]);
+        } else {
+            setDevicesChecked([]);
+        }
     };
 
     const handleEditClick = (id) => {
@@ -62,7 +80,22 @@ function ListDevicesComponent({pagination, devices, visible, total, history, loc
 
     return <>
         <table className="table table-striped table-hover table-sm">
-            <TableHeader/>
+            <thead>
+            <tr>
+                <th>{formControl ?
+                    <input
+                        type="checkbox"
+                        onChange={handleSelectAllInPage}
+                        checked={devices.length === devices.filter(exist => devicesChecked.includes(exist._id)).length}
+                    /> :
+                    <span>No.</span>}</th>
+                <th className="text-center">UID</th>
+                {!formControl && <th className="text-center">VENDOR</th>}
+                <th className="text-center">CREATED</th>
+                {!formControl && <th className="text-center">STATUS</th>}
+                {!formControl && <th></th>}
+            </tr>
+            </thead>
             <tbody>
             {devices.map((device, index) => {
                 const d = moment(device.created);
@@ -74,31 +107,38 @@ function ListDevicesComponent({pagination, devices, visible, total, history, loc
                     }}
                     onDoubleClick={() => handleLinkClick(device._id)}
                 >
-                    <td className="text-center">{index}</td>
+                    <td>{formControl ?
+                        <input
+                            type="checkbox"
+                            value={device._id}
+                            checked={devicesChecked.includes(device._id)}
+                            onChange={handleOnchange}
+                        /> :
+                        index + 1}</td>
                     <td className="text-center">
-                        <span
+                        {!formControl ? <span
                             style={{
                                 cursor: 'pointer'
                             }}
                             className="btn-link"
                             onClick={() => handleLinkClick(device._id)}
-                        >{device.uid}</span>
+                        >{device.uid}</span> : device.uid}
                     </td>
-                    <td className="text-center">{device.vendor}</td>
-                    <td className="text-center">{d.isValid() ? d.format('YYY-MM-Dd') : "-"}</td>
-                    <td className="text-center">{device.status ? device.status : "-"}</td>
-                    <td className="text-center">
+                    {!formControl && <td className="text-center">{device.vendor}</td>}
+                    <td className="text-center">{d.isValid() ? d.format('DD-MM-YYYY hh:mm:ss') : "-"}</td>
+                    {!formControl && <td className="text-center">{device.status ? device.status : "-"}</td>}
+                    {!formControl && <td className="text-center">
                         <div className="btn-group btn-group-sm">
-                                <span className="btn">
-                                    <FontAwesomeIcon icon="edit" color="#117EDD"
-                                                     onClick={() => handleEditClick(device._id)}/>
-                                </span>
+                    <span className="btn">
+                    <FontAwesomeIcon icon="edit" color="#117EDD"
+                                     onClick={() => handleEditClick(device._id)}/>
+                    </span>
                             <span className="btn">
-                                <FontAwesomeIcon icon="trash" color="#FF2626"
-                                                 onClick={() => handleDeleteClick(device._id)}/>
-                                </span>
+                    <FontAwesomeIcon icon="trash" color="#FF2626"
+                                     onClick={() => handleDeleteClick(device._id)}/>
+                    </span>
                         </div>
-                    </td>
+                    </td>}
                 </tr>
             })}
             </tbody>
@@ -108,9 +148,8 @@ function ListDevicesComponent({pagination, devices, visible, total, history, loc
 }
 
 const mapStateToProps = state => ({
-    devices: state.devices.managmentDevices.devices,
-    total: state.devices.managmentDevices.total,
-    visible: state.drawer.visible,
+    devices: state.devices.devices,
+    total: state.devices.total,
     pagination: state.pagination
 });
 

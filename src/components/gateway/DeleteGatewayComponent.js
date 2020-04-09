@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Card from "../common/Card";
 import {connect} from "react-redux";
-import {DeleteGateway} from "./redux/actions/GatewaysActions";
+import {DeleteGateway} from "./redux/GatewaysActions";
 
 function DeleteGatewayComponent({gateway, loading, history, funcDeleteGateway}) {
     const [afterLoading, setAfterLoading] = useState(false);
@@ -11,7 +11,7 @@ function DeleteGatewayComponent({gateway, loading, history, funcDeleteGateway}) 
             history.push('/gateways')
         }
         setAfterLoading(loading);
-    }, [loading]);
+    }, [afterLoading, history, loading]);
 
     const cancelForm = () => {
         history.push('/gateways')
@@ -45,8 +45,8 @@ function DeleteGatewayComponent({gateway, loading, history, funcDeleteGateway}) 
 };
 
 const mapStateToProps = state => ({
-    gateway: state.gateways.managmentGateways.gateway,
-    loading: state.gateways.managmentGateways.loadingDelete
+    gateway: state.gateways.gateway,
+    loading: state.gateways.loadingDelete
 });
 
 const mapDispatchToProps = dispatch => ({
