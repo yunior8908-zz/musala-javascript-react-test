@@ -2,7 +2,7 @@
 
 To Install the necesary packages run command: yarn or npm install
 
-### `npm start | yarn start` 
+### `npm dev | yarn dev` 
 Runs the express server on 8000 port and react client on 3000 port.
 
 ### `npm start:server | yarn start:server`

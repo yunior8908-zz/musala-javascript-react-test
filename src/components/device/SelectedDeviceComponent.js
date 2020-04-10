@@ -1,21 +1,16 @@
 import React from "react";
 import {connect} from "react-redux";
-import styled from "styled-components";
 import EmptyComponent from "../common/EmptyComponent";
-
-const StyledDeviceDetails = styled.div`
-    display: flex;
-    flex-direction: column;
-`;
+import StyledDivDetails from "../common/StyledDivDetails";
 
 function SelectedDeviceComponent ({ device }) {
     return <>
-        {device ? <StyledDeviceDetails>
+        {device ? <StyledDivDetails>
             <label>UID: <strong>{device.uid}</strong></label>
             <label>Vendor: <strong>{device.vendor || "-"}</strong></label>
             <label>Created: <strong>{device.created}</strong></label>
             <label>Status: <strong>{device.status}</strong></label>
-        </StyledDeviceDetails> : <EmptyComponent />}
+        </StyledDivDetails> : <EmptyComponent />}
     </>
 }
 

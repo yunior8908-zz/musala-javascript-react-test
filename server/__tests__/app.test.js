@@ -5,7 +5,7 @@ describe('loading express', () => {
     let app;
     let request;
     beforeEach(() => {
-        app = require('./app');
+        app = require('../app');
         request = supertest(app);
     });
 

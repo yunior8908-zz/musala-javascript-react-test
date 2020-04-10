@@ -8,9 +8,6 @@
     "@fortawesome/free-regular-svg-icons": "latest",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/react-fontawesome": "^0.1.9",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.4.1",
@@ -35,7 +32,7 @@
     "start:client": "react-scripts start",
     "start:server": "nodemon ./server/app.js",
     "build": "react-scripts build",
-    "test:client": "react-scripts test",
+    "test:client": "jest ./src",
     "test:server": "jest ./server",
     "eject": "react-scripts eject"
   },
@@ -55,6 +52,10 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-react": "^7.9.4",
+    "babel-jest": "^24.9.0",
     "concurrently": "^5.1.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
@@ -62,6 +63,28 @@
     "eslint": "^6.8.0",
     "jest": "24.9.0",
     "nodemon": "^2.0.2",
+    "redux-mock-store": "^1.5.4",
     "supertest": "^4.0.2"
+  },
+  "jest": {
+    "verbose": false,
+    "setupFilesAfterEnv": [
+      "./src/setupTests.js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "tsx",
+      "json",
+      "node"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "testRegex": "((\\.|/*.)(test|spec))\\.js?$",
+    "testEnvironment": "node"
   }
 }
