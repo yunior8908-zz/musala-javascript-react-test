@@ -13,7 +13,7 @@ const AddGatewayComponent = ({history, loading, funcAddGateway}) => {
         setAfterLoading(loading);
     }, [afterLoading, history, loading]);
 
-    const handlerCancelar = () => {
+    const handlerCancel = () => {
         history.push('/gateways');
     };
 
@@ -21,7 +21,7 @@ const AddGatewayComponent = ({history, loading, funcAddGateway}) => {
         funcAddGateway(values);
     };
 
-    return <FormGateway title={"Add gateway"} cancelForm={handlerCancelar} saveValues={onSubmit}/>
+    return <FormGateway title={"Add gateway"} cancelForm={handlerCancel} saveValues={onSubmit}/>
 
 };
 

@@ -25,13 +25,13 @@ function FormDevice({title, editDevice, cancelForm, saveValues, handleDelete}) {
         title={title}
         footer={<div className="form-row justify-content-end">
             <div className="col-auto">
-                <button className="btn btn-secondary btn-sm" onClick={cancelForm}>cancel</button>
+                <button className="btn btn-secondary btn-sm" onClick={cancelForm}>Cancel</button>
             </div>
             {editDevice && <div className="col-auto">
                 <button className="btn btn-danger btn-sm" onClick={onDelete}>Delete</button>
             </div>}
             <div className="col-auto">
-                <button className="btn btn-primary btn-sm" onClick={handleSubmit(onSubmit)}>Aceptar</button>
+                <button className="btn btn-primary btn-sm" onClick={handleSubmit(onSubmit)}>Save</button>
             </div>
         </div>}
         body={<form className="row">
@@ -46,7 +46,7 @@ function FormDevice({title, editDevice, cancelForm, saveValues, handleDelete}) {
                         required: "The field is required.",
                         pattern: {
                             value: /^\d+$/,
-                            message: "Invalid format."
+                            message: "Invalid format. Must be a number  "
                         }
                     })}
                     type="text"
@@ -70,6 +70,7 @@ function FormDevice({title, editDevice, cancelForm, saveValues, handleDelete}) {
             <div className="form-group small col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <label>Status:</label>
                 <select
+                    defaultValue="offline"
                     ref={register({
                         required: 'The field is required',
                     })}

@@ -15,6 +15,7 @@ const DeviceSchema = new Schema({
     },
     status: {
         type: String,
+        required: [true, "status is required"],
         enum: ["online", "offline"]
     }
 }, {versionKey: false});

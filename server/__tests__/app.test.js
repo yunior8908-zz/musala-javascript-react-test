@@ -1,9 +1,11 @@
 var supertest = require('supertest');
+
 var {formGatewayValidData, formGatewayInvalidData} = require('./mockData');
 
 describe('loading express', () => {
     let app;
     let request;
+
     beforeEach(() => {
         app = require('../app');
         request = supertest(app);

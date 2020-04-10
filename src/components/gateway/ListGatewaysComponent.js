@@ -20,7 +20,7 @@ function TableHead() {
     </thead>
 }
 
-function ListGatewaysComponent({
+export function ListGatewaysComponent({
                                    pagination,
                                    gateways,
                                    total,

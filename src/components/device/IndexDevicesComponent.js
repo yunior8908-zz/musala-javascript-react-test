@@ -1,11 +1,9 @@
 import React from "react";
 import ListDevicesComponent from "./ListDevicesComponent";
-import {connect} from "react-redux";
 import Toolbar from "../common/Toolbar";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-
-function IndexDevicesComponent({total, history}) {
+function IndexDevicesComponent({history}) {
     const handleToFormAdd = () => {
         history.push('/devices/add');
     };
@@ -18,8 +16,4 @@ function IndexDevicesComponent({total, history}) {
     </>
 }
 
-const mapStateToProps = state => ({
-    total: state.devices.total
-});
-
-export default connect(mapStateToProps)(IndexDevicesComponent);
+export default IndexDevicesComponent;

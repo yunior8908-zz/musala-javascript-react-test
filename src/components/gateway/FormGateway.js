@@ -55,13 +55,13 @@ function FormGateway({title, editGateway, cancelForm, saveValues, handleDelete})
         title={title}
         footer={<div className="form-row justify-content-end">
             <div className="col-auto">
-                <button className="btn btn-secondary btn-sm" onClick={cancelForm}>cancelar</button>
+                <button className="btn btn-secondary btn-sm" onClick={cancelForm}>Cancel</button>
             </div>
             {editGateway && <div className="col-auto">
-                <button className="btn btn-danger btn-sm" onClick={onDelete}>Delete</button>
+                <button id="button-delete" className="btn btn-danger btn-sm" onClick={onDelete}>Delete</button>
             </div>}
             <div className="col-auto">
-                <button className="btn btn-primary btn-sm" onClick={handleSubmit(onSubmit)}>Aceptar
+                <button className="btn btn-primary btn-sm" id="button-save" onClick={handleSubmit(onSubmit)}>Save
                 </button>
             </div>
         </div>}
@@ -116,6 +116,7 @@ function FormGateway({title, editGateway, cancelForm, saveValues, handleDelete})
                 <div className="form-group small col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <label>Ipv4 Address:</label>
                     <input
+                        id="input-address"
                         ref={register({
                             required: 'The field is required',
                             pattern: {
@@ -127,6 +128,7 @@ function FormGateway({title, editGateway, cancelForm, saveValues, handleDelete})
                         name="address"
                     />
                     <div
+                        id="error-address"
                         className={`${errors.address ? 'invalid' : 'valid'}-feedback`}>{errors.address && errors.address.message}</div>
                 </div>
                 <div className="col col-12">

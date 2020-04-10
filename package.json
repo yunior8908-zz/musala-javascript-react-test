@@ -32,7 +32,7 @@
     "start:client": "react-scripts start",
     "start:server": "nodemon ./server/app.js",
     "build": "react-scripts build",
-    "test:client": "jest ./src",
+    "test:client": "jest --env=jsdom ./src -u",
     "test:server": "jest ./server",
     "eject": "react-scripts eject"
   },

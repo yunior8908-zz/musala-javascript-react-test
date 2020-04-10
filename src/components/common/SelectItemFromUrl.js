@@ -17,7 +17,7 @@ const SelectItemFromUrl = ({location, functSelectGateway, funcSelectDevices}) =>
                 funcSelectDevices(urlSearchParams.get('id'));
             }
         }
-    }, [funcSelectDevices, functSelectGateway, location, urlSearchParams]);
+    }, [location, functSelectGateway, funcSelectDevices, urlSearchParams]);
     return null;
 };
 

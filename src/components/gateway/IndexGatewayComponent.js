@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import ListGateways from "./ListGatewaysComponent";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Toolbar from "../common/Toolbar";
@@ -16,4 +16,4 @@ function IndexGatewayComponent({history}) {
     </>
 };
 
-export default IndexGatewayComponent;
+export default memo(IndexGatewayComponent);

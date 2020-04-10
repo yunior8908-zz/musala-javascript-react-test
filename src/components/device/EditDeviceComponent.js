@@ -14,7 +14,7 @@ function EditDeviceComponent({history, location, device, loading, funcEditDevice
         setAfterLoading(loading);
     }, [afterLoading, history, loading]);
 
-    const handlerCancelar = () => {
+    const handlerCancel = () => {
         history.push('/devices');
     };
 
@@ -31,7 +31,7 @@ function EditDeviceComponent({history, location, device, loading, funcEditDevice
     };
 
     return <>
-        <FormDevice title="Editar device" editDevice={device} cancelForm={handlerCancelar} saveValues={onSubmit} handleDelete={handleDelete}/>
+        <FormDevice title="Editar device" editDevice={device} cancelForm={handlerCancel} saveValues={onSubmit} handleDelete={handleDelete}/>
     </>
 };
 

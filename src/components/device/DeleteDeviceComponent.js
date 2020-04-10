@@ -34,7 +34,7 @@ function DeleteDeviceComponent({device, loading, history, funcDeleteDevice}) {
         }
         footer={<div className="form-row justify-content-end">
             <div className="col-auto">
-                <button className="btn btn-secondary btn-sm" onClick={cancelForm}>cancelar</button>
+                <button className="btn btn-secondary btn-sm" onClick={cancelForm}>Cancel</button>
             </div>
             <div className="col-auto">
                 <button className="btn btn-danger btn-sm" onClick={handleDelete}>Delete

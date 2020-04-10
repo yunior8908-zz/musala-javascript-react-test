@@ -5,7 +5,7 @@ const formGatewayInvalidData = {
 };
 
 const formGatewayValidData = {
-    serial: "1",
+    serial: "12",
     name: "probando",
     address: "127.0.0.1",
     addDevices: ["5e8eaff334a32e01408dec24","5e8eaff334a32e01408dec25","5e8eaff334a32e01408dec26"]

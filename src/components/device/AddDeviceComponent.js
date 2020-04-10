@@ -13,7 +13,7 @@ const AddDeviceComponent = ({history, loading, funcAddDevice}) => {
         setAfterLoading(loading);
     }, [afterLoading, history, loading]);
 
-    const handlerCancelar = () => {
+    const handlerCancel = () => {
         history.push('/devices');
     };
 
@@ -21,7 +21,7 @@ const AddDeviceComponent = ({history, loading, funcAddDevice}) => {
         funcAddDevice(values);
     };
 
-    return <FormDevice title={"Add a device"} cancelForm={handlerCancelar} saveValues={onSubmit}/>
+    return <FormDevice title={"Add a device"} cancelForm={handlerCancel} saveValues={onSubmit}/>
 
 };
 

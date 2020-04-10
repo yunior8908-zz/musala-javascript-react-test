@@ -14,7 +14,7 @@ function EditGatewayComponent({history, location, gateway, loading, funcEditGate
         setAfterLoading(loading);
     }, [afterLoading, history, loading]);
 
-    const handlerCancelar = () => {
+    const handlerCancel = () => {
         history.push('/gateways');
     };
 
@@ -31,7 +31,7 @@ function EditGatewayComponent({history, location, gateway, loading, funcEditGate
     };
 
     return <>
-        <FormGateway title="Editar gateway" editGateway={gateway} cancelForm={handlerCancelar} saveValues={onSubmit} handleDelete={handleDelete}/>
+        <FormGateway title="Editar gateway" editGateway={gateway} cancelForm={handlerCancel} saveValues={onSubmit} handleDelete={handleDelete}/>
     </>
 };
 
