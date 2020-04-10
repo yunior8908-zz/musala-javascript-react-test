@@ -11,11 +11,12 @@ const GatewysComponent = lazy(() => import('./components/gateway/IndexGatewayCom
 const GatewysAddComponent = lazy(() => import('./components/gateway/AddGatewayComponent'));
 const GatewysEditComponent = lazy(() => import('./components/gateway/EditGatewayComponent'));
 const GatewysDeleteComponent = lazy(() => import('./components/gateway/DeleteGatewayComponent'));
-
 const DevicesComponent = lazy(() => import('./components/device/IndexDevicesComponent'));
 const DevicesAddComponent = lazy(() => import('./components/device/AddDeviceComponent'));
 const DevicesEditComponent = lazy(() => import('./components/device/EditDeviceComponent'));
 const DevicesDeleteComponent = lazy(() => import('./components/device/DeleteDeviceComponent'));
+const NotFoundComponent = lazy(()=> import('./components/NotFoundPage'));
+
 
 const StyledMain = styled.main`
     width: 90.5%;
@@ -25,7 +26,7 @@ const StyledMain = styled.main`
     }
 `;
 
-function Routes(props) {
+function RoutesComponent() {
     return (<>
         <BrowserRouter>
             <SelectItemFromUrl/>
@@ -58,6 +59,7 @@ function Routes(props) {
                                    component={props => <DevicesEditComponent {...props} />}/>
                             <Route path="/devices/delete" exact
                                    component={props => <DevicesDeleteComponent {...props} />}/>
+                            <Route exact component={props => <NotFoundComponent { ...props} />} />
                         </Switch>
                     </StyledMain>
                 </Suspense>
@@ -67,4 +69,4 @@ function Routes(props) {
     </>);
 }
 
-export default Routes;
+export default RoutesComponent;

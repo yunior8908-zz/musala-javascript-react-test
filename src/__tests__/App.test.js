@@ -1,14 +1,21 @@
 import React from "react";
 import {shallow} from 'enzyme';
-import toJson from 'enzyme-to-json'
+import {Route} from 'react-router-dom';
 import App from "../App";
-import Routes from "../Routes";
+
 
 describe("App component", () => {
+    let wrapper;
+    beforeEach(()=> {
+        wrapper = shallow(<App/>);
+    })
     it('Should be render', () => {
-        const wrapper = shallow(<App/>);
         expect(wrapper).toMatchSnapshot();
-        const RoutesWrapper = shallow(<Routes/>);
-        expect(wrapper).chil
+    });
+
+    it("list of dinamic router", ()=> {
+        const wrapperDiv = wrapper.dive();
+        const routes = wrapperDiv.find(Route);
+        expect(routes.length).toEqual(10)
     })
 });
